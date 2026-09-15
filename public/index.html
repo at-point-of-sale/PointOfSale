@@ -51,7 +51,7 @@
 
             main h2 .button {
                 align-self: stretch;
-                margin-left: auto;
+                margin-left: 0.5em;
                 color: #1976d2;
                 background: #bbdefb;
                 font-size: 1rem;
@@ -66,6 +66,10 @@
             main h2 .button svg {
                 height: 2em;
                 margin-right: 0.5em;
+            }
+
+            main h2 a.button:first-of-type {
+                margin-left: auto;
             }
 
             main section {
@@ -165,12 +169,19 @@
 
                     receipt-printer
 
-                    <a href="receipt-printer/playground.html" class="button">
+                    <a href="receipt-printer/playground/" class="button">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                             <path fill="#2196f3" d="M44,24c0,11.047-8.953,20-20,20S4,35.047,4,24S12.953,4,24,4S44,12.953,44,24z"></path><path fill="#fff" d="M17,33V15l18,9L17,33z"></path>
                         </svg>
 
                         Playground
+                    </a>
+                    <a href="receipt-printer/font-editor/" class="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                            <path fill="#2196f3" d="M44,24c0,11.047-8.953,20-20,20S4,35.047,4,24S12.953,4,24,4S44,12.953,44,24z"></path><path fill="#fff" transform="translate(12 12)" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
+                        </svg>
+
+                        Font editor
                     </a>
                 </h2>
                 <p>
@@ -178,7 +189,7 @@
                 </p>
                 <dl>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/ReceiptPrinterEncoder">receipt-printer-encoder</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/ReceiptPrinterEncoder">receipt-printer-encoder</a>
                     </dt>
 
                     <dd>
@@ -197,7 +208,7 @@
                 </p>
                 <dl>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/ReceiptPrinterStatus">receipt-printer-status</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/ReceiptPrinterStatus">receipt-printer-status</a>
                     </dt>
                     <dd>
                         <div class='support'>
@@ -213,7 +224,7 @@
                 </p>
                 <dl>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/WebUSBReceiptPrinter">webusb-receipt-printer</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/WebUSBReceiptPrinter">webusb-receipt-printer</a>
                     </dt>
                     <dd>
                         <div class='support'>
@@ -222,7 +233,7 @@
                         </div>
                     </dd>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/WebSerialReceiptPrinter">webserial-receipt-printer</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/WebSerialReceiptPrinter">webserial-receipt-printer</a>
                     </dt>
                     <dd>
                         <div class='support'>
@@ -231,7 +242,7 @@
                         </div>
                     </dd>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/WebBluetoothReceiptPrinter">webbluetooth-receipt-printer</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/WebBluetoothReceiptPrinter">webbluetooth-receipt-printer</a>
                     </dt>
                     <dd>
                         <div class='support'>
@@ -240,7 +251,7 @@
                         </div>
                     </dd>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/NetworkReceiptPrinter">network-receipt-printer</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/NetworkReceiptPrinter">network-receipt-printer</a>
                     </dt>
                     <dd>
                         <div class='support'>
@@ -248,7 +259,7 @@
                         </div>
                     </dd>
                     <dt>
-                        @point-of-sale/<a href="https://github.com/NielsLeenheer/SystemReceiptPrinter">system-receipt-printer</a>
+                        @point-of-sale/<a href="https://github.com/at-point-of-sale/SystemReceiptPrinter">system-receipt-printer</a>
                     </dt>
                     <dd>
                         <div class='support'>
@@ -266,7 +277,7 @@
 
                     barcode-scanner
 
-                    <a href="barcode-scanner/playground.html" class="button">
+                    <a href="barcode-scanner/playground/" class="button">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                             <path fill="#2196f3" d="M44,24c0,11.047-8.953,20-20,20S4,35.047,4,24S12.953,4,24,4S44,12.953,44,24z"></path><path fill="#fff" d="M17,33V15l18,9L17,33z"></path>
                         </svg>
@@ -278,21 +289,21 @@
                     Scanning barcodes by using an external scanner, or the camera of a laptop or mobile device:
                 </p>
                 <dl>
-                    <dt>@point-of-sale/<a href="https://github.com/NielsLeenheer/WebHidBarcodeScanner">webhid-barcode-scanner</a></dt>
+                    <dt>@point-of-sale/<a href="https://github.com/at-point-of-sale/WebHidBarcodeScanner">webhid-barcode-scanner</a></dt>
                     <dd>
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>
                             <div class='icon edge' title="Edge"></div>
                         </div>
                     </dd>
-                    <dt>@point-of-sale/<a href="https://github.com/NielsLeenheer/WebSerialBarcodeScanner">webserial-barcode-scanner</a></dt> 
+                    <dt>@point-of-sale/<a href="https://github.com/at-point-of-sale/WebSerialBarcodeScanner">webserial-barcode-scanner</a></dt> 
                     <dd>
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>
                             <div class='icon edge' title="Edge"></div>
                         </div>
                     </dd>
-                    <dt>@point-of-sale/<a href="https://github.com/NielsLeenheer/WebcamBarcodeScanner">webcam-barcode-scanner</a></dt>
+                    <dt>@point-of-sale/<a href="https://github.com/at-point-of-sale/WebcamBarcodeScanner">webcam-barcode-scanner</a></dt>
                     <dd>
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>
@@ -301,7 +312,7 @@
                             <div class='icon safari' title="Safari"></div>
                         </div>
                     </dd>
-                    <dt>@point-of-sale/<a href="https://github.com/NielsLeenheer/KeyboardBarcodeScanner">keyboard-barcode-scanner</a></dt>
+                    <dt>@point-of-sale/<a href="https://github.com/at-point-of-sale/KeyboardBarcodeScanner">keyboard-barcode-scanner</a></dt>
                     <dd>
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>
@@ -325,7 +336,7 @@
                     Show text on a customer facing display:
                 </p>
                 <dl>
-                    <dt>@point-of-sale/<a href="https://github.com/NielsLeenheer/WebSerialCustomerDisplay">webserial-customer-display</a></dt>
+                    <dt>@point-of-sale/<a href="https://github.com/at-point-of-sale/WebSerialCustomerDisplay">webserial-customer-display</a></dt>
                     <dd>
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>

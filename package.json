@@ -1,0 +1,14 @@
+{
+  "name": "point-of-sale-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:apps && node scripts/dev.js",
+    "dev:site": "wrangler dev",
+    "build:apps": "npm run build --prefix ../ReceiptPrinterPlayground && npm run build --prefix ../BarcodeScannerPlayground && npm run build --prefix ../ReceiptPrinterFontEditor",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.132.0"
+  }
+}

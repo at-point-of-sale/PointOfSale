@@ -1,0 +1,41 @@
+name = "point-of-sale-website"
+main = "worker/index.js"
+compatibility_date = "2026-09-01"
+
+# The site answers on both domains. A custom domain makes the Worker the
+# owner of the hostname: deploying creates the DNS record and certificate,
+# so nothing else may hold a DNS record for these names when it first runs
+# (see README.md for the move away from Pages).
+routes = [
+  { pattern = "point-of-sale.dev", custom_domain = true },
+  { pattern = "point-of-sale.app", custom_domain = true }
+]
+
+# The static pages of the site. Cloudflare serves these at the edge without
+# running the Worker; the Worker only runs for requests that match no file,
+# and always for the paths of the apps, so a file of the site can never
+# shadow an app.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = [
+  "/receipt-printer/playground*",
+  "/receipt-printer/font-editor*",
+  "/barcode-scanner/playground*"
+]
+
+# The apps, each a Worker of its own with the name below, deployed from its
+# own repository. The Worker reaches them over these bindings, not over a
+# public URL, so the apps need no hostname of their own. `npm run dev` runs
+# them next to this Worker from sibling checkouts (see package.json).
+[[services]]
+binding = "RECEIPT_PRINTER_PLAYGROUND"
+service = "receipt-printer-playground"
+
+[[services]]
+binding = "RECEIPT_PRINTER_FONT_EDITOR"
+service = "receipt-printer-font-editor"
+
+[[services]]
+binding = "BARCODE_SCANNER_PLAYGROUND"
+service = "barcode-scanner-playground"
