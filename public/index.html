@@ -42,7 +42,27 @@
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
                 gap: 1em;
-                margin-bottom: 4em;
+                margin-bottom: 2em;
+            }
+
+            .about {
+                grid-column: 2;
+                columns: 2;
+                column-gap: 2em;
+                margin-bottom: 2.5em;
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+
+            .about p {
+                margin: 0;
+                break-inside: avoid;
+            }
+
+            @media (max-width: 36em) {
+                .about {
+                    columns: 1;
+                }
             }
 
             .panels div {
@@ -179,12 +199,6 @@
             }
 
 
-            .credits {
-                grid-column: 2;
-                font-size: 0.85em;
-                margin-bottom: 0.5em;
-            }
-
             footer {
                 grid-column: 1 / -1;
                 display: grid;
@@ -196,6 +210,12 @@
             footer img {
                 grid-column: 2;
                 display: block;
+            }
+
+            footer p {
+                grid-column: 2;
+                font-size: 0.85em;
+                margin: 0 0 1.5em;
             }
 
         </style>
@@ -213,7 +233,16 @@
             <div>Scan barcodes using any common scanner, or use your webcam</div>
             <div>Field tested on dozens of actual printers and barcode scanners</div>
         </div>
+        <div class="about">
+            <p>
+                Create a receipt using a simple API that describes what you want to show on your receipt. You can add text, tables, barcodes and QR codes. And if you want you can even use Markdown for text style or Receiptline for layout. Then encode your receipt into ESC/POS or StarPRNT printer languages.
+            </p>
+            <p>
+                Pick from a number of different printer drivers that fit your situation and your hardware. Use WebUSB, WebSerial or WebBluetooth direct from the browser, or use vendor SDKs from Capacitor. You can even use the already installed system printer drivers from Node or Electron for a seamless printing experience.
+            </p>
+        </div>
         <main>
+            <hr>
             <section>
                 <h2>
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">
@@ -489,12 +518,10 @@
             </section>
         </main>
 
-        <div class="credits">
+        <footer>
             <p>
                 These libraries have been created by <a href="https://nielsleenheer.com">Niels Leenheer</a> under the MIT license. Feel free to use it in your products. The development of these libraries is sponsored by <a href="https://salonhub.nl">Salonhub</a>.
             </p>
-        </div>
-        <footer>
             <img src="logo.svg" alt="Salonhub" width="100">
         </footer>
     </body>
