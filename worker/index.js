@@ -2,14 +2,18 @@
 
    The pages of the site itself are static files in public/, served as Worker
    assets: Cloudflare answers those at the edge and this script never runs
-   for them. The script runs for the apps, which are Workers of their own
-   deployed from their own repositories, and puts each of them under a path
-   of this domain through a service binding, so the apps stay at the URLs
-   they have always had:
+   for them. The script runs for the apps, which are deployed on their own,
+   and puts each of them under a path of this domain, so the apps stay at
+   the URLs they have always had:
 
      /receipt-printer/playground/    ReceiptPrinterPlayground
-     /receipt-printer/font-editor/   ReceiptPrinterFontEditor
      /barcode-scanner/playground/    BarcodeScannerPlayground
+
+   An app is reached in one of two ways. A Pages project, or anything else
+   with a public hostname, is fetched over its `origin`. A Worker of its own
+   is called over a service `binding`, named in wrangler.toml, which needs
+   no hostname. Both playgrounds are Pages projects today; they move to
+   Workers, and to a binding here, when their npm dependencies are released.
 
    The prefix is stripped before the request is handed to the app, so every
    app is built and deployed as if it lived at the root of a domain, and the
@@ -17,9 +21,8 @@
    static file is a 404 from the assets binding. */
 
 const apps = [
-  { prefix: '/receipt-printer/playground', binding: 'RECEIPT_PRINTER_PLAYGROUND' },
-  { prefix: '/receipt-printer/font-editor', binding: 'RECEIPT_PRINTER_FONT_EDITOR' },
-  { prefix: '/barcode-scanner/playground', binding: 'BARCODE_SCANNER_PLAYGROUND' },
+  { prefix: '/receipt-printer/playground', origin: 'https://receipt-printer-playground.pages.dev' },
+  { prefix: '/barcode-scanner/playground', origin: 'https://barcode-scanner-playground.pages.dev' },
 ];
 
 function redirect(location) {
@@ -52,7 +55,14 @@ export default {
         }
 
         url.pathname = url.pathname.slice(app.prefix.length);
-        const response = await env[app.binding].fetch(new Request(url, request));
+
+        let response;
+        if (app.origin) {
+          const target = new URL(url.pathname + url.search, app.origin);
+          response = await fetch(new Request(target, request));
+        } else {
+          response = await env[app.binding].fetch(new Request(url, request));
+        }
 
         /* The app answers a few paths with a redirect, a page asked for with
            its .html or a path that is not in its canonical encoding, and it
@@ -60,8 +70,8 @@ export default {
            gets the prefix back before it reaches the browser */
         const location = response.headers.get('Location');
         if (location) {
-          const target = new URL(location, url);
-          if (target.origin === url.origin) {
+          const target = new URL(location, app.origin ?? url);
+          if (target.origin === (app.origin ?? url.origin)) {
             const headers = new Headers(response.headers);
             headers.set('Location', app.prefix + target.pathname + target.search + target.hash);
             return new Response(response.body, { status: response.status, statusText: response.statusText, headers });

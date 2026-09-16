@@ -1,11 +1,15 @@
 /* Runs the website on http://localhost:8787 next to the three apps, each a
    wrangler dev process of its own from the sibling checkout, on the ports
-   below. Separate processes, because wrangler connects service bindings
-   between dev processes through its local registry, while a single dev
-   process running all four configurations (wrangler dev -c ... -c ...)
-   answers a binding to a Worker that is only static assets with the
-   website's own assets, in wrangler 4.132 at least. The apps are expected
-   to be built: `npm run dev` builds them first. */
+   below, for an app that the website reaches over a service binding. An
+   app fetched over its origin needs none of this: `npm run dev` alone
+   proxies the live pages.dev hostname.
+
+   Separate processes, because wrangler connects service bindings between
+   dev processes through its local registry, while a single dev process
+   running all four configurations (wrangler dev -c ... -c ...) answers a
+   binding to a Worker that is only static assets with the website's own
+   assets, in wrangler 4.132 at least. The apps are expected to be built:
+   `npm run dev:apps` builds them first. */
 
 import { spawn } from 'node:child_process';
 
