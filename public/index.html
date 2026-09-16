@@ -16,9 +16,9 @@
             }
 
             body {
+                margin: 0;
                 display: grid;
-                grid-template-columns: 1em minmax(20em, 48em) 1em;
-                justify-content: center;
+                grid-template-columns: minmax(1em, 1fr) minmax(20em, 48em) minmax(1em, 1fr);
             }
 
             a, a:visited {
@@ -28,17 +28,49 @@
 
             header {
                 grid-column: 2;
-                margin-bottom: 4em;
+                margin-bottom: 1em;
             }
 
             header h1 {
                 font-size: 4em;
                 font-size: clamp(2.4em, 10vw, 4em);
-                margin: 2em 0 0;
+                margin: 1em 0 0;
+            }
+
+            .panels {
+                grid-column: 2;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+                gap: 1em;
+                margin-bottom: 4em;
+            }
+
+            .panels div {
+                background: #e3f2fd;
+                color: #1565c0;
+                border-radius: 1em;
+                padding: 1em;
+                font-size: 1.2em;
+                font-weight: 500;
+                line-height: 1.4;
             }
 
             main {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: subgrid;
+            }
+
+            main section {
                 grid-column: 2;
+            }
+
+            main hr {
+                grid-column: 1 / -1;
+                height: 10px;
+                margin: 0 0 2.5em;
+                border: 0;
+                background: #e3f2fd;
             }
 
             main h2 {
@@ -71,9 +103,14 @@
             }
 
             main section {
-                margin-bottom: 4em;
+                margin-bottom: 2.5em;
             }
 
+
+            main section > p {
+                /* The intros stay clear of the support column of the lists */
+                max-width: 27.5em;
+            }
 
             main section dl {
                 display: grid;
@@ -138,13 +175,27 @@
                 background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZD0iTTQwLjM2IDQzLjA5aC02LjQ4bC40NS01LjQ1aC0zLjE4bC0uNDUgNS40NUgxNy4yOWwtLjQ1LTUuNDVoLTMuMThsLjQ1IDUuNDVINy42M0wzLjk5IDE5LjQ1bDkuMS0xNC41NGgyMS44Mkw0NCAxOS40NiA0MC4zNiA0My4xWm0tNy4yNy0zMC45MWgtNS44NGwuMzkgMi43M2gtNy4yN2wuMzktMi43M2gtNS44NGwtMy42NCA3LjI3TDEzLjEgMzRoMjEuODJsMS44Mi0xNC41NS0zLjY0LTcuMjdabS0zLjE4IDE2Ljk5Yy0uNSAwLS45MS0xLjUxLS45MS0zLjM4cy40MS0zLjM4LjkxLTMuMzguOTEgMS41MS45MSAzLjM4LS40MSAzLjM4LS45MSAzLjM4Wm0tMTEuNDguMjhjLS41IDAtLjkxLTEuNTEtLjkxLTMuMzhzLjQxLTMuMzguOTEtMy4zOC45MSAxLjUxLjkxIDMuMzgtLjQxIDMuMzgtLjkxIDMuMzhaIiBzdHlsZT0iZmlsbDojNDQ0Ii8+PHBhdGggZD0iTTAgMGg0OHY0OEgweiIgc3R5bGU9ImZpbGw6bm9uZSIvPjwvc3ZnPg==);
             }
             .capacitor {
-                background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJMYXllcl8xIiB2aWV3Qm94PSIwIDAgNDggNDgiPjxkZWZzPjxzdHlsZT4uY2xzLTJ7ZmlsbDojMTE5ZWZmfS5jbHMtM3tmaWxsOiM1M2I5ZmZ9PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTAgMGg0OHY0OEgweiIgc3R5bGU9ImZpbGw6bm9uZSIvPjxwYXRoIGQ9Im0xMC4yMyAxMi40Ni02LjE4IDYuMTkgOS41MyA5LjU2TDQgMzcuODJsNi4xNiA2LjE5IDkuNi05LjYxIDkuNTUgOS41NCA2LjE4LTYuMTktMjUuMjYtMjUuMjlaIiBjbGFzcz0iY2xzLTMiLz48cGF0aCBkPSJtMjUuOTYgMjguMi02LjIgNi4xOSA5LjU1IDkuNTQgNi4xOC02LjE5LTkuNTMtOS41NFoiIGNsYXNzPSJjbHMtMiIvPjxwYXRoIGQ9Im0yNS45NiAyOC4yLTYuMiA2LjE5IDIuMzkgMi4zNyAzLjgxLTguNTZaIi8+PHBhdGggZD0ibTM0LjQgMTkuNzggOS42LTkuNjFMMzcuODIgNGwtOS42IDkuNTktOS41NS05LjU0LTYuMTggNi4xOSAyNS4yNiAyNS4yOSA2LjE4LTYuMTktOS41My05LjU2WiIgY2xhc3M9ImNscy0zIi8+PHBhdGggZD0ibTIyLjAzIDE5Ljc4IDYuMi02LjE5LTkuNTUtOS41NC02LjE4IDYuMTkgOS41MyA5LjU0WiIgY2xhc3M9ImNscy0yIi8+PHBhdGggZD0ibTIyLjAyIDE5Ljc4IDYuMi02LjE5LTIuMzktMi4zNy0zLjgxIDguNTZaIi8+PC9zdmc+);
+                background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJMYXllcl8xIiB2aWV3Qm94PSIwIDAgNDggNDgiPjxkZWZzPjxzdHlsZT4uY2xzLTJ7ZmlsbDojMTE5ZWZmfS5jbHMtM3tmaWxsOiM1M2I5ZmZ9PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTAgMGg0OHY0OEgweiIgc3R5bGU9ImZpbGw6bm9uZSIvPjxwYXRoIGQ9Im0xMC4yMyAxMi40Ni02LjE4IDYuMTkgOS41MyA5LjU2TDQgMzcuODJsNi4xNiA2LjE5IDkuNi05LjYxIDkuNTUgOS41NCA2LjE4LTYuMTktMjUuMjYtMjUuMjlaIiBjbGFzcz0iY2xzLTMiLz48cGF0aCBkPSJtMjUuOTYgMjguMi02LjIgNi4xOSA5LjU1IDkuNTQgNi4xOC02LjE5LTkuNTMtOS41NFoiIGNsYXNzPSJjbHMtMiIvPjxwYXRoIGQ9Im0yNS45NiAyOC4yLTYuMiA2LjE5IDIuMzkgMi4zNyAzLjgxLTguNTZaIiBzdHlsZT0iZmlsbDojMGQ4YWU2Ii8+PHBhdGggZD0ibTM0LjQgMTkuNzggOS42LTkuNjFMMzcuODIgNGwtOS42IDkuNTktOS41NS05LjU0LTYuMTggNi4xOSAyNS4yNiAyNS4yOSA2LjE4LTYuMTktOS41My05LjU2WiIgY2xhc3M9ImNscy0zIi8+PHBhdGggZD0ibTIyLjAzIDE5Ljc4IDYuMi02LjE5LTkuNTUtOS41NC02LjE4IDYuMTkgOS41MyA5LjU0WiIgY2xhc3M9ImNscy0yIi8+PHBhdGggZD0ibTIyLjAyIDE5Ljc4IDYuMi02LjE5LTIuMzktMi4zNy0zLjgxIDguNTZaIiBzdHlsZT0iZmlsbDojMGQ4YWU2Ii8+PC9zdmc+);
             }
 
 
-            footer {
+            .credits {
                 grid-column: 2;
-                padding-bottom: 3em;
+                font-size: 0.85em;
+                margin-bottom: 0.5em;
+            }
+
+            footer {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: subgrid;
+                background: #e3f2fd;
+                padding: 2em 0;
+            }
+
+            footer img {
+                grid-column: 2;
+                display: block;
             }
 
         </style>
@@ -157,7 +208,11 @@
                 A set of JavaScript libraries for building point-of-sale applications. From receipt printers to barcode scanners, we've got you covered.
             </p>
         </header>
-
+        <div class="panels">
+            <div>Print receipts from the browser or any other JavaScript runtime</div>
+            <div>Scan barcodes using any common scanner, or use your webcam</div>
+            <div>Field tested on dozens of actual printers and barcode scanners</div>
+        </div>
         <main>
             <section>
                 <h2>
@@ -187,9 +242,11 @@
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>
                             <div class='icon edge' title="Edge"></div>
-                            +
+                            <div class='icon firefox' title="Firefox"></div>
+                            <div class='icon safari' title="Safari"></div>
                             |
                             <div class='icon node' title="Node"></div>
+                            <div class='icon capacitor' title="Capacitor"></div>
                             +
                         </div>
                     </dd>
@@ -304,9 +361,11 @@
                         <div class='support'>
                             <div class='icon chrome' title="Chrome"></div>
                             <div class='icon edge' title="Edge"></div>
-                            +
+                            <div class='icon firefox' title="Firefox"></div>
+                            <div class='icon safari' title="Safari"></div>
                             |
                             <div class='icon node' title="Node"></div>
+                            <div class='icon capacitor' title="Capacitor"></div>
                             +
                         </div>
                     </dd>
@@ -328,7 +387,7 @@
                     </dd>
                 </dl>
             </section>
-
+            <hr>
             <section>
                 <h2>
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">
@@ -405,7 +464,7 @@
                     </dd>
                 </dl>
             </section>
-
+            <hr>
             <section>
                 <h2>
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">
@@ -430,11 +489,12 @@
             </section>
         </main>
 
-        <footer>
+        <div class="credits">
             <p>
                 These libraries have been created by <a href="https://nielsleenheer.com">Niels Leenheer</a> under the MIT license. Feel free to use it in your products. The development of these libraries is sponsored by <a href="https://salonhub.nl">Salonhub</a>.
             </p>
-
+        </div>
+        <footer>
             <img src="logo.svg" alt="Salonhub" width="100">
         </footer>
     </body>
