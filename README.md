@@ -10,6 +10,7 @@ The Worker does two things:
 | Path | App | Reached over |
 | --- | --- | --- |
 | `/receipt-printer/playground/` | [ReceiptPrinterPlayground](https://github.com/at-point-of-sale/ReceiptPrinterPlayground) | the Pages project, `receipt-printer-playground.pages.dev` |
+| `/receipt-printer/inspector/` | the inspector, a second page of the same project | the same Pages project, with `inspector.html` as the index of this prefix |
 | `/barcode-scanner/playground/` | [BarcodeScannerPlayground](https://github.com/at-point-of-sale/BarcodeScannerPlayground) | the Pages project, `barcode-scanner-playground.pages.dev` |
 
 An app is reached in one of two ways, chosen per row in the table at the top of `worker/index.js`:

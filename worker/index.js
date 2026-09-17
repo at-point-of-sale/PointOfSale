@@ -7,6 +7,7 @@
    the URLs they have always had:
 
      /receipt-printer/playground/    ReceiptPrinterPlayground
+     /receipt-printer/inspector/     ReceiptPrinterPlayground, its second page
      /barcode-scanner/playground/    BarcodeScannerPlayground
 
    An app is reached in one of two ways. A Pages project, or anything else
@@ -17,11 +18,16 @@
 
    The prefix is stripped before the request is handed to the app, so every
    app is built and deployed as if it lived at the root of a domain, and the
-   apps reference their own files relatively. Anything else that is not a
-   static file is a 404 from the assets binding. */
+   apps reference their own files relatively. An app that is a second page
+   of another's deployment names that page as its `index`: the bare prefix
+   fetches that page rather than the deployment's own index, and everything
+   under the prefix is the deployment's files, which both pages share.
+   Anything else that is not a static file is a 404 from the assets
+   binding. */
 
 const apps = [
   { prefix: '/receipt-printer/playground', origin: 'https://receipt-printer-playground.pages.dev' },
+  { prefix: '/receipt-printer/inspector', origin: 'https://receipt-printer-playground.pages.dev', index: '/inspector.html' },
   { prefix: '/barcode-scanner/playground', origin: 'https://barcode-scanner-playground.pages.dev' },
 ];
 
@@ -55,6 +61,12 @@ export default {
         }
 
         url.pathname = url.pathname.slice(app.prefix.length);
+
+        /* A second page of a deployment is that page where its prefix alone
+           is asked for */
+        if (app.index && url.pathname === '/') {
+          url.pathname = app.index;
+        }
 
         let response;
         if (app.origin) {
