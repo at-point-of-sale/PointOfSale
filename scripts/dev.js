@@ -2,7 +2,7 @@
    wrangler dev process of its own from the sibling checkout, on the ports
    below, for an app that the website reaches over a service binding. An
    app fetched over its origin needs none of this: `npm run dev` alone
-   proxies the live pages.dev hostname.
+   proxies its live hostname.
 
    Separate processes, because wrangler connects service bindings between
    dev processes through its local registry, while a single dev process

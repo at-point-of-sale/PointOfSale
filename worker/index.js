@@ -13,21 +13,24 @@
    An app is reached in one of two ways. A Pages project, or anything else
    with a public hostname, is fetched over its `origin`. A Worker of its own
    is called over a service `binding`, named in wrangler.toml, which needs
-   no hostname. Both playgrounds are Pages projects today; they move to
-   Workers, and to a binding here, when their npm dependencies are released.
+   no hostname. The receipt printer playground is a Worker; the barcode
+   scanner playground is a Pages project today, and moves to a Worker, and
+   to a binding here, when its npm dependencies are released.
 
    The prefix is stripped before the request is handed to the app, so every
    app is built and deployed as if it lived at the root of a domain, and the
    apps reference their own files relatively. An app that is a second page
    of another's deployment names that page as its `index`: the bare prefix
    fetches that page rather than the deployment's own index, and everything
-   under the prefix is the deployment's files, which both pages share.
+   under the prefix is the deployment's files, which both pages share. The
+   page is named without its .html, the name the deployment serves it under;
+   asked for with the extension it answers a redirect to the name without.
    Anything else that is not a static file is a 404 from the assets
    binding. */
 
 const apps = [
-  { prefix: '/receipt-printer/playground', origin: 'https://receipt-printer-playground.pages.dev' },
-  { prefix: '/receipt-printer/inspector', origin: 'https://receipt-printer-playground.pages.dev', index: '/inspector.html' },
+  { prefix: '/receipt-printer/playground', binding: 'RECEIPT_PRINTER_PLAYGROUND' },
+  { prefix: '/receipt-printer/inspector', binding: 'RECEIPT_PRINTER_PLAYGROUND', index: '/inspector' },
   { prefix: '/barcode-scanner/playground', origin: 'https://barcode-scanner-playground.pages.dev' },
 ];
 

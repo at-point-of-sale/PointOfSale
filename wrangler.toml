@@ -28,9 +28,8 @@ run_worker_first = [
 # rather than a public hostname: a binding here, named in the table at the
 # top of worker/index.js, to the name of that Worker. The deploy fails if
 # the Worker does not exist yet, so a binding is added after the app's
-# first deploy. Both playgrounds are Pages projects today and are fetched
-# over their pages.dev hostnames instead.
-#
-# [[services]]
-# binding = "RECEIPT_PRINTER_PLAYGROUND"
-# service = "receipt-printer-playground"
+# first deploy. The barcode scanner playground is a Pages project today and
+# is fetched over its pages.dev hostname instead.
+[[services]]
+binding = "RECEIPT_PRINTER_PLAYGROUND"
+service = "receipt-printer-playground"

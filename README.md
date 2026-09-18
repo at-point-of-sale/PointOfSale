@@ -9,14 +9,14 @@ The Worker does two things:
 
 | Path | App | Reached over |
 | --- | --- | --- |
-| `/receipt-printer/playground/` | [ReceiptPrinterPlayground](https://github.com/at-point-of-sale/ReceiptPrinterPlayground) | the Pages project, `receipt-printer-playground.pages.dev` |
-| `/receipt-printer/inspector/` | the inspector, a second page of the same project | the same Pages project, with `inspector.html` as the index of this prefix |
+| `/receipt-printer/playground/` | [ReceiptPrinterPlayground](https://github.com/at-point-of-sale/ReceiptPrinterPlayground) | the Worker `receipt-printer-playground`, over the binding `RECEIPT_PRINTER_PLAYGROUND` |
+| `/receipt-printer/inspector/` | the inspector, a second page of the same project | the same Worker, with its page `inspector` as the index of this prefix |
 | `/barcode-scanner/playground/` | [BarcodeScannerPlayground](https://github.com/at-point-of-sale/BarcodeScannerPlayground) | the Pages project, `barcode-scanner-playground.pages.dev` |
 
 An app is reached in one of two ways, chosen per row in the table at the top of `worker/index.js`:
 
-- **`origin`**: a public hostname the Worker fetches, such as a Pages project. This is how both playgrounds are reached today.
-- **`binding`**: a service binding to a Worker of the app's own, declared in `wrangler.toml`. The app then needs no hostname. The playgrounds and the font editor each have a `wrangler.toml` for this, and move over once the npm packages they depend on are released: deploy the app with `npm run deploy` in its repository, add the binding to `wrangler.toml` here, and switch the row from `origin` to `binding`. The deploy of the website fails if a binding names a Worker that does not exist yet, which is why the bindings come after the apps.
+- **`origin`**: a public hostname the Worker fetches, such as a Pages project. This is how the barcode scanner playground is reached today.
+- **`binding`**: a service binding to a Worker of the app's own, declared in `wrangler.toml`. The app then needs no hostname. This is how the receipt printer playground is reached. The barcode scanner playground and the font editor each have a `wrangler.toml` for this, and move over once the npm packages they depend on are released: deploy the app with `npm run deploy` in its repository, add the binding to `wrangler.toml` here, and switch the row from `origin` to `binding`. The deploy of the website fails if a binding names a Worker that does not exist yet, which is why the bindings come after the apps.
 
 To add an app, deploy it somewhere, add a row, and if it is a Worker, a binding.
 
@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-The website runs on http://localhost:8787 and the apps come from their live origins. `npm run dev:apps` is for apps reached over a binding: it builds the three apps from the sibling checkouts (`../ReceiptPrinterPlayground` and so on) and runs each as a wrangler dev process next to the website, so the bindings connect locally.
+The website runs on http://localhost:8787 and the apps reached over an origin come from their live hostnames. `npm run dev:apps` is for apps reached over a binding: it builds the three apps from the sibling checkouts (`../ReceiptPrinterPlayground` and so on) and runs each as a wrangler dev process next to the website, so the bindings connect locally.
 
 ## Deploying
 
