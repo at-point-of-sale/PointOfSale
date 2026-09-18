@@ -8,6 +8,7 @@
 
      /receipt-printer/playground/    ReceiptPrinterPlayground
      /receipt-printer/inspector/     ReceiptPrinterPlayground, its second page
+     /receipt-printer/font-editor/   ReceiptPrinterFontEditor
      /barcode-scanner/playground/    BarcodeScannerPlayground
 
    An app is reached in one of two ways. A Pages project, or anything else
@@ -31,6 +32,7 @@
 const apps = [
   { prefix: '/receipt-printer/playground', binding: 'RECEIPT_PRINTER_PLAYGROUND' },
   { prefix: '/receipt-printer/inspector', binding: 'RECEIPT_PRINTER_PLAYGROUND', index: '/inspector' },
+  { prefix: '/receipt-printer/font-editor', binding: 'RECEIPT_PRINTER_FONT_EDITOR' },
   { prefix: '/barcode-scanner/playground', origin: 'https://barcode-scanner-playground.pages.dev' },
 ];
 

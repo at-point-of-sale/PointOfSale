@@ -21,6 +21,7 @@ binding = "ASSETS"
 run_worker_first = [
   "/receipt-printer/playground*",
   "/receipt-printer/inspector*",
+  "/receipt-printer/font-editor*",
   "/barcode-scanner/playground*"
 ]
 
@@ -33,3 +34,7 @@ run_worker_first = [
 [[services]]
 binding = "RECEIPT_PRINTER_PLAYGROUND"
 service = "receipt-printer-playground"
+
+[[services]]
+binding = "RECEIPT_PRINTER_FONT_EDITOR"
+service = "receipt-printer-font-editor"
